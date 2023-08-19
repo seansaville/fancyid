@@ -8,8 +8,6 @@ from enum import Enum, auto
 from words import _ADJECTIVES, _ANIMALS
 
 WORDS = {
-    "SIZE": ["small", "big", "large", "huge", "tiny", "gigantic", "teeny", "enormous"],
-    "COLOR": ["red", "blue", "green", "yellow", "black", "maroon", "pink", "purple"],
     "ADJECTIVE": _ADJECTIVES,
     "ANIMAL": _ANIMALS
 }
@@ -108,30 +106,8 @@ def generate(format: str | None = None) -> str:
 
 
 if __name__ == "__main__":
-    format_strings = [
-        "SIZECOLORANIMAL",
-        "SIZE_COLOR_ANIMAL",
-        "SIZE-COLOR-ANIMAL",
-        "SIZE--COLOR--ANIMAL",
-        "SIZE COLOR ANIMAL",
-        "SIZE     COLOR     ANIMAL",
-        "sizecoloranimal",
-        "sizeColorAnimal",
-        "size color animal animal",
-        "Size-Color-Animal",
-        "size_Color_Animal",
-    ]
-
-    for fmt_str in format_strings:
-        gen = FancyIdGenerator(format=fmt_str, seed=1337)
-        print(gen.generate())
-        print(gen.generate())
-        print(gen.generate())
-        print()
-
     print(generate("adjective-adjective-animal"))
     print(generate("adjective-adjective-animal"))
     print(generate("adjective-adjective-animal"))
 
     print(num_unique_ids("adjective-adjective-animal"))
-

@@ -5,7 +5,7 @@ import string
 from dataclasses import dataclass
 from enum import Enum, auto
 
-from words import _ADJECTIVES, _ANIMALS
+from fancyid.words import _ADJECTIVES, _ANIMALS
 
 WORDS = {
     "ADJECTIVE": _ADJECTIVES,

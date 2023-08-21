@@ -21,7 +21,7 @@ class FancyIdGenerator:
         :param skip: Optional offset to skip forward in the random sequence produced by this `FancyIdGenerator`
             instance. Passing `skip=N` is equivalent to calling `FancyIdGenerator.generate` N times.
         """
-        self.spec = _parse_format_string(format) if format else None
+        self.spec = _parse_format_string(format) if format else DEFAULT_SPEC
         self.random = random.Random(seed)
         if skip:
             for _ in range(skip):
@@ -101,6 +101,13 @@ def _parse_format_string(format_str: str) -> FancyIdSpec:
             if chunk.upper() in WORDS.keys():
                 word_groups.append(chunk)
                 chunk_start_index = i
+
+    bad_word_groups = [group for group in word_groups if group.upper() not in WORDS.keys()]
+    if any(bad_word_groups):
+        raise ValueError(f"Unknown word groups: {bad_word_groups}")
+
+    if not any(word_groups):
+        raise ValueError("Format string did not contain any valid word groups")
 
     # Determine casing
     if all(word.isupper() for word in word_groups):
